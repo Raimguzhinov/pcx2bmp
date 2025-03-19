@@ -16,14 +16,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Установка зависимостей SDL2
-      run: apt-get update && \
-           apt-get install -y libsdl2{,-image,-mixer,-ttf,-gfx}-dev
-
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
         go-version: '1.20'
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libsdl2{,-image,-mixer,-ttf,-gfx}-dev
 
     - name: Build
       run: go build -v ./...
